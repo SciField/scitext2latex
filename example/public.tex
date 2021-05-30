@@ -1,0 +1,91 @@
+\documentclass[aps,pra,superscriptaddress,longbibliography,twocolumn]{revtex4-1}
+\usepackage[utf8]{inputenc}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx} %for maxsizebox 
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{thmtools}
+\usepackage[ruled,vlined]{algorithm2e}
+\renewcommand{\algorithmcfname}{Protocol}
+% For autoref style
+\def\equationautorefname{Equ.}
+\def\sectionautorefname{Section}
+\def\algorithmautorefname{Protocol}
+\def\theoremautorefname{Thm.}
+\def\figureautorefname{Fig.}
+\def\propositionautorefname{Prop.}
+% For Remark environments
+\newtheorem{myconjecture}{Conjecture}
+\newtheorem{myclaim}{Claim}
+\newtheorem{mytheorem}{Theorem}
+\newtheorem{myremark}{Remark}
+\newtheorem{mylemma}{Lemma}
+\newtheorem{mydefinition}{Definition}
+\newtheorem{myproposition}{Proposition}
+\newtheorem{mycorollary}{Corollary}
+% For hyperlink color
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=black,urlcolor=red}
+
+\begin{document}
+
+\title{Low-depth Hamiltonian Simulation by Adaptive Product Formula}
+\date{\today}
+
+\newcommand{\affilATsustech}{Southern University of Science and Technology, Shenzhen 518055, China}
+\newcommand{\affilATpku}{Center on Frontiers of Computing Studies, Department of Computer Science, Peking University, Beijing 100871, China}
+\newcommand{\affilAToxford}{Clarendon Laboratory, University of Oxford, Parks Road, Oxford OX1 3PU, United Kingdom}
+
+\author{Zi-Jian Zhang}
+\email{zi-jian@outlook.com}
+\affiliation{\affilATsustech}
+\affiliation{\affilATpku}
+\author{Jinzhao Sun}
+\email{jinzhao.sun@physics.ox.ac.uk}
+\affiliation{\affilAToxford}
+\affiliation{\affilATpku}
+
+\begin{abstract}
+We numerically test the adaptive method with electronic Hamiltonians of $\mathrm{H_2O}$ and $\mathrm{H_4}$ molecules, and the transverse field ising model with random coefficients. 
+Compared to the first-order Suzuki-Trotter product formula, our method can significantly reduce the circuit depth (specifically the number of two-qubit gates) by around two orders while maintaining the simulation accuracy.
+We show applications of the method in simulating many-body dynamics and solving energy spectra with the quantum Krylov algorithm. 
+Our work sheds light on practical Hamiltonian simulation with noisy-intermediate-scale-quantum devices.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+\label{section-intro}
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+\begin{figure}[htb]
+\label{fig-he}
+\centering
+\includegraphics[width=\linewidth]{Hello}
+\caption{This is a figure}
+\end{figure}
+This is some text. This is some text. This is some text. This is some text. Let see \autoref{fig-he}. Let see \autoref{fig-he}. Here is a equation! Here is a equation!
+\begin{equation}
+\label{equ-simple}
+1+1=2
+\end{equation}
+This is some text. This is some text. This is some text. This is some text.  Let's autorefer to \autoref{equ-simple}. Here is a list!
+\begin{enumerate}
+\item What's your name
+\item My name's Li Hua
+\end{enumerate}
+Here is a theorem! Here is a theorem! Here is a theorem!
+\begin{myconjecture}[Goldback]
+\label{remark-goldback}
+Here is the goldback conjecture
+\end{myconjecture}
+
+\begin{proof}
+Here, let's prove goldback conjecture!
+\end{proof}
+
+\section{Conclusion}
+\label{section-conc}
+This is some text. This is some text. \autoref{remark-goldback} This is some text. This is some text.
+Let's return to \autoref{section-intro}!
+
+\end{document}

@@ -1,0 +1,9 @@
+- 
+  command: ket
+  mapping: '|#1\rangle'
+- 
+  command: bra
+  mapping: '\langle #1|'
+- 
+  command: trace
+  mapping: '\operatorname{Tr}'

@@ -1,0 +1,22 @@
+<section title="Introduction" label="intro"/> 
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. 
+<fig src="Hello" label="he">
+This is a figure
+</fig>
+This is some text. This is some text. This is some text. This is some text. Let see \ref{fig-he}. Let see \ref{fig-he}. Here is a equation! Here is a equation!
+<equ label="simple">
+1+1=2
+</equ>
+This is some text. This is some text. This is some text. This is some text.  Let's refer to \ref{equ-simple}. Here is a list!
+<ol>
+<li>What's your name</li>
+<li>My name's Li Hua</li>
+</ol>
+Here is a theorem! Here is a theorem! Here is a theorem!
+<remark type="conjecture" label="goldback" title="Goldback"> Here is the goldback conjecture </remark>
+<quote type="proof">
+Here, let's prove goldback conjecture!
+</quote>
+<section title="Conclusion" label="conc"/> 
+This is some text. This is some text. \ref{remark-goldback} This is some text. This is some text.
+Let's return to \ref{section-intro}!

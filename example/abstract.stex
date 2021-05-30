@@ -1,0 +1,4 @@
+We numerically test the adaptive method with electronic Hamiltonians of $\mathrm{H_2O}$ and $\mathrm{H_4}$ molecules, and the transverse field ising model with random coefficients. 
+Compared to the first-order Suzuki-Trotter product formula, our method can significantly reduce the circuit depth (specifically the number of two-qubit gates) by around two orders while maintaining the simulation accuracy.
+We show applications of the method in simulating many-body dynamics and solving energy spectra with the quantum Krylov algorithm. 
+Our work sheds light on practical Hamiltonian simulation with noisy-intermediate-scale-quantum devices.

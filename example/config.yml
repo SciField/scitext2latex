@@ -1,0 +1,21 @@
+macro:
+  - quantum.yml
+bibliography:
+  - quantum_chemistry
+  - quantum_computing
+  - hamiltonian_simulation
+additionalRemarkName:
+  - conjecture
+  - claim
+additionalAlgorithmName:
+  - procedure
+latex:
+  documentType:
+    documentClass: "revtex4-1"
+    documentClassOption: 
+      - "aps,pra,superscriptaddress,longbibliography"
+      - "twocolumn"
+  linkColor:
+    ref: blue
+    cite: black
+    url: red

@@ -1,0 +1,22 @@
+title: Low-depth Hamiltonian Simulation by Adaptive Product Formula
+author:
+  - 
+    givenName: Zi-Jian
+    familyName: Zhang
+    email: zi-jian@outlook.com
+    affiliation:
+      - $sustech
+      - $pku
+  -
+    givenName: Jinzhao
+    familyName: Sun
+    email: jinzhao.sun@physics.ox.ac.uk
+    affiliation:
+      - $oxford
+      - $pku
+
+affiliation:
+  sustech: Southern University of Science and Technology, Shenzhen 518055, China
+  pku: Center on Frontiers of Computing Studies, Department of Computer Science, Peking University, Beijing 100871, China
+  oxford: Clarendon Laboratory, University of Oxford, Parks Road, Oxford OX1 3PU, United Kingdom
+
