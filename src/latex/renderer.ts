@@ -1,88 +1,100 @@
 
-import { INode, ITag, SyntaxKind } from '../html5parser/types';
+import { INode, ITag, SyntaxKind } from '../parser/types';
 import { renderText } from './render_text';
 import { renderAlgorithm, renderEquation, renderFigure, renderList, renderQuote, renderRemark, renderSection } from './render_misc';
+import { EvnKind, RenderCtx } from './types';
 
 
 const inlineTags = ["link", "cite", "ref"]
-export function renderInline(node: INode): string {
+export function renderInline(node: INode, ctx: RenderCtx): RenderCtx {
     if (node.type === SyntaxKind.Tag) {
         switch (node.name) {
             default:
-                throw new Error("Tag "+node.name+" not allowed")
         }
     } else {
-        return renderText(node)
+        renderText(node, ctx)
     }
+    return ctx
 }
 
-const componentTags = ["fig", "figs", "equ", "ol", "ul"]
-export function renderComponent(node: INode): string {
+
+const componentRendererMap = {
+    "fig": renderFigure,
+    "figs": renderFigure,
+    "equ": renderEquation,
+    "ol": renderList,
+    "ul": renderList
+}
+const componentTags = Object.keys(componentRendererMap)
+
+export function renderComponent(node: INode, ctx: RenderCtx): RenderCtx {
     if (node.type === SyntaxKind.Tag) {
-        switch (node.name) {
-            case "equ":
-                return renderEquation(node)
-            case "fig":
-                return renderFigure(node)
-            case "ol":
-                return renderList(node)
-            case "ul":
-                return renderList(node)
-            default:
-                return renderInline(node)
-        }
+        componentRendererMap[node.name](node, ctx)
     } else {
-        return renderText(node)
+        renderText(node, ctx)
     }
+    return ctx
 }
 
-const structureTags = ["section", "subsection", "subsubsection", "remark", "alg","quote"]
-export function renderStructure(node: INode): string {
+
+const structureRendererMap = {
+    "section": renderSection,
+    "subsection": renderSection,
+    "subsubsection": renderSection,
+    "remark": renderRemark,
+    "alg": renderAlgorithm,
+    "quote": renderQuote
+}
+const structureTags = Object.keys(structureRendererMap)
+
+export function renderStructure(node: INode, ctx: RenderCtx): RenderCtx {
     if (node.type === SyntaxKind.Tag) {
-        switch (node.name) {
-            case "section":
-                return renderSection(node)
-            case "subsection":
-                return renderSection(node)
-            case "subsubsection":
-                return renderSection(node)
-            case "remark":
-                return renderRemark(node)
-            case "alg":
-                return renderAlgorithm(node)
-            case "quote":
-                return renderQuote(node)
-            default:
-                return renderComponent(node)
-        }
+        structureRendererMap[node.name](node, ctx)
     } else {
-        return renderText(node)
+        renderText(node, ctx)
     }
+    return ctx
 }
 
-export function renderNodesBy(ast: INode[], renderer:(Node)=>string): string {
+export function renderNodesBy(ast: INode[], renderer: (Node) => string) {
     return ast.map(renderer).join("")
 }
-export function renderAsComponents(ast: INode[]){
-    return ast.map(renderComponent).join("")
-}
-export function renderAsInline(ast: INode[]){
-    return ast.map(renderInline).join("")
+export function renderInEnv(ast: INode[], ctx: RenderCtx, env: EvnKind) {
+    let temp = ctx.env
+    ctx.env = env
+    renderAny(ast,ctx)
+    ctx.env = temp
 }
 
-export function renderAny(ast: INode[]): string {
-    return ast.map((node) => {
+export function renderAsInline(ast: INode[], ctx: RenderCtx) {
+    renderInEnv(ast,ctx,EvnKind.Inline)
+}
+
+export function renderAsComponent(ast: INode[], ctx: RenderCtx) {
+    renderInEnv(ast,ctx,EvnKind.Component)
+}
+
+export function renderAny(ast: INode[], ctx: RenderCtx): RenderCtx {
+    for (let node of ast) {
         if (node.type === SyntaxKind.Tag) {
-            if (componentTags.indexOf(node.name) > -1)
-                return renderComponent(node)
-            else if (inlineTags.indexOf(node.name) > -1)
-                return renderInline(node)
+            if (componentTags.indexOf(node.name) > -1 && ctx.env <= EvnKind.Component)
+                renderComponent(node, ctx)
+            else if (inlineTags.indexOf(node.name) > -1 && ctx.env <= EvnKind.Inline)
+                renderInline(node, ctx)
             else if (structureTags.indexOf(node.name) > -1)
-                return renderStructure(node)
-            else 
-                throw new Error("Invalid tag '"+node.name+"'")
-        } else {
-            return renderText(node)
+                renderStructure(node, ctx)
+            else
+                throw new Error("Tag '" + node.name + "' is invalid in current env")
         }
-    }).join("")
+        else
+            renderText(node, ctx)
+    }
+    return ctx
+}
+
+
+export function renderFromRoot(ast: INode[], env:EvnKind = EvnKind.All): string {
+    let ctx = new RenderCtx()
+    ctx.env=env
+    return renderAny(ast, ctx).stringify()
 }

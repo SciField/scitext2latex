@@ -4,6 +4,7 @@ bibliography:
   - quantum_chemistry
   - quantum_computing
   - hamiltonian_simulation
+bibliographystyle: apsrev4-1
 additionalRemarkName:
   - conjecture
   - claim
